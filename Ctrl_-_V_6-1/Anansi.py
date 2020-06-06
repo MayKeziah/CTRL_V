@@ -36,23 +36,36 @@ class Anansi(object):
 
 	def callback(self, realTimeFFT, rmsMethod = False):
 		self.realAudio = np.concatenate((self.realAudio[1:], [realTimeFFT]))
-
+		accuracy = 0.5
 		for phrase, sig in self.sigs.items():
 			diff = Sampler.rms(self.realAudio, sig)
+			# print(diff)
 
 			if rmsMethod:
 				# if diff < self.rmsAccuracy:
 				# 	print(phrase)
 					# do something
 				
-				if phrase == 'Down' and diff < 1.1:
-					print(diff)
+				# if phrase == 'Down' and diff < 0.8:
+				# 	print("RMS Down")
 
-			else:
-				# if diff > self.accuracy:
-				# 	print(phrase)
-					# do something
+				if phrase == 'Left' and diff < accuracy:
+					print("RMS Left")
 
-				if phrase == 'Down' and diff > 0.963:
-					print(diff)
+				# elif phrase == 'Right' and diff < accuracy:
+				# 	print("RMS Right")
+				
+				# elif phrase == 'Up' and diff < accuracy:
+				# 	print("RMS Up")
+
+				# elif phrase == 'Stop' and diff < accuracy:
+				# 	print("RMS Stop")
+
+			# else:
+			# 	# if diff > self.accuracy:
+			# 	# 	print(phrase)
+			# 		# do something
+
+			# 	if phrase == 'Down' and diff > 0.963:
+			# 		print("RMS D")
 
